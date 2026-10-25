@@ -1,0 +1,508 @@
+/* ==========================================================================
+   InterviewAce Voice: App.css (home page)
+   --------------------------------------------------------------------------
+   Everything page-specific is scoped under `.app`, which only exists on the
+   home route. The /interview route renders <Interview /> outside `.app`,
+   so Interview.css stays fully in control there.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. Design tokens
+   Prefixed with --ia- to avoid colliding with any variables in Interview.css
+   ========================================================================== */
+:root {
+  /* Surfaces */
+  --ia-bg: #070b1a;
+  --ia-bg-raised: #0d1330;
+  --ia-surface: rgba(17, 24, 56, 0.72);
+  --ia-surface-hover: rgba(22, 31, 70, 0.85);
+
+  /* Borders */
+  --ia-border: rgba(148, 163, 255, 0.16);
+  --ia-border-strong: rgba(167, 150, 255, 0.4);
+
+  /* Text */
+  --ia-text: #f5f7ff;
+  --ia-text-muted: #9ba7c7;
+  --ia-text-subtle: #8591b3;
+
+  /* Accents */
+  --ia-lavender: #b9aeff;
+  --ia-lavender-soft: rgba(185, 174, 255, 0.12);
+  --ia-purple: #6d4aff;
+  --ia-indigo: #4f46e5;
+  --ia-success: #34d399;
+
+  /* Shape and depth */
+  --ia-radius-lg: 20px;
+  --ia-radius-md: 14px;
+  --ia-radius-pill: 999px;
+  --ia-shadow-card: 0 12px 32px rgba(2, 4, 16, 0.45);
+  --ia-shadow-button: 0 8px 22px rgba(93, 72, 240, 0.35);
+
+  /* Typography (system fonts only, no setup required) */
+  --ia-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif;
+
+  /* Layout */
+  --ia-gutter: clamp(16px, 4vw, 40px);
+  --ia-max-width: 1120px;
+}
+
+
+/* ==========================================================================
+   2. Base reset (safe and global)
+   Only box-sizing is applied globally. Typography, colors and spacing are
+   scoped to `.app` so the interview page is never affected.
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   3. App shell
+   ========================================================================== */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  font-family: var(--ia-font);
+  color: var(--ia-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  background-color: var(--ia-bg);
+  background-image:
+    radial-gradient(60% 50% at 50% 0%, rgba(99, 83, 255, 0.28) 0%, rgba(99, 83, 255, 0) 70%),
+    radial-gradient(40% 40% at 90% 85%, rgba(79, 70, 229, 0.16) 0%, rgba(79, 70, 229, 0) 70%),
+    radial-gradient(35% 35% at 8% 70%, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0) 70%),
+    linear-gradient(180deg, #0a1030 0%, var(--ia-bg) 55%);
+  background-repeat: no-repeat;
+}
+
+.app h1,
+.app h2,
+.app p {
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   4. Navbar
+   ========================================================================== */
+.app .navbar {
+  width: 100%;
+  max-width: var(--ia-max-width);
+  margin: 0 auto;
+  padding: 20px var(--ia-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app .brand {
+  font-size: clamp(1.15rem, 3.4vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ia-text);
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 8px;
+  padding: 6px 2px;
+  transition: opacity 0.2s ease;
+}
+
+.app .brand:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.app .brand span {
+  color: var(--ia-lavender);
+}
+
+.app .nav-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--ia-lavender);
+  background: var(--ia-lavender-soft);
+  border: 1px solid var(--ia-border);
+  border-radius: var(--ia-radius-pill);
+}
+
+
+/* ==========================================================================
+   5. Hero
+   ========================================================================== */
+.app .hero {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vh, 56px) var(--ia-gutter) clamp(32px, 6vh, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.app .pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 8px 16px;
+  margin-bottom: clamp(18px, 3vh, 28px);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--ia-lavender);
+  background: var(--ia-lavender-soft);
+  border: 1px solid var(--ia-border-strong);
+  border-radius: var(--ia-radius-pill);
+}
+
+.app .pill span {
+  font-size: 0.85em;
+  color: var(--ia-lavender);
+}
+
+.app h1 {
+  font-size: clamp(2.25rem, 7vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--ia-text);
+  text-wrap: balance;
+}
+
+.app h1 span {
+  color: var(--ia-lavender);
+}
+
+.app .description {
+  max-width: 60ch;
+  margin-top: clamp(16px, 2.5vh, 24px);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--ia-text-muted);
+}
+
+
+/* ==========================================================================
+   6. Interview option card
+   ========================================================================== */
+.app .interview-option {
+  width: 100%;
+  max-width: 520px;
+  margin-top: clamp(28px, 5vh, 44px);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  background: var(--ia-surface);
+  border: 1px solid var(--ia-border);
+  border-radius: var(--ia-radius-lg);
+  box-shadow: var(--ia-shadow-card);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.app .interview-option:hover {
+  background: var(--ia-surface-hover);
+  border-color: var(--ia-border-strong);
+}
+
+.app .avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--ia-purple) 0%, var(--ia-indigo) 100%);
+  border-radius: var(--ia-radius-md);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.app .card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.app .card-text h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ia-text);
+}
+
+.app .card-text p {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ia-text-muted);
+}
+
+.app .status-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--ia-success);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
+}
+
+
+/* ==========================================================================
+   7. Primary button
+   ========================================================================== */
+.app .start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  margin-top: clamp(20px, 3.5vh, 28px);
+  padding: 0 32px;
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--ia-purple) 0%, var(--ia-indigo) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--ia-radius-md);
+  box-shadow: var(--ia-shadow-button);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app .start-button span {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.app .start-button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(93, 72, 240, 0.45);
+}
+
+.app .start-button:hover span {
+  transform: translateX(3px);
+}
+
+.app .start-button:active {
+  transform: translateY(0);
+  filter: brightness(0.96);
+  box-shadow: 0 4px 14px rgba(93, 72, 240, 0.35);
+}
+
+
+/* ==========================================================================
+   8. Note and footer
+   ========================================================================== */
+.app .note {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ia-text-subtle);
+}
+
+.app footer {
+  width: 100%;
+  max-width: var(--ia-max-width);
+  margin: 0 auto;
+  padding: 20px var(--ia-gutter) 28px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ia-text-subtle);
+  border-top: 1px solid var(--ia-border);
+}
+
+
+/* ==========================================================================
+   9. Focus states (keyboard accessibility)
+   ========================================================================== */
+.app .brand:focus-visible,
+.app .start-button:focus-visible {
+  outline: 3px solid var(--ia-lavender);
+  outline-offset: 3px;
+}
+
+.app .brand:focus:not(:focus-visible),
+.app .start-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* ==========================================================================
+   10. Responsive
+   ========================================================================== */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+  .app .navbar {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .app .hero {
+    justify-content: flex-start;
+    padding-top: clamp(24px, 6vh, 48px);
+  }
+
+  .app .interview-option {
+    padding: 16px 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .app .nav-tag {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .app .pill {
+    padding: 7px 14px;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+  }
+
+  .app h1 {
+    letter-spacing: -0.03em;
+  }
+
+  .app .interview-option {
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+
+  .app .avatar {
+    width: 46px;
+    height: 46px;
+    font-size: 0.9375rem;
+  }
+
+  .app .card-text h2 {
+    font-size: 1.025rem;
+  }
+
+  .app .card-text p {
+    font-size: 0.85rem;
+  }
+
+  .app .start-button {
+    width: 100%;
+    max-width: 520px;
+    min-height: 56px;
+    padding: 0 24px;
+  }
+}
+
+/* Small mobile (320px) */
+@media (max-width: 360px) {
+  .app .navbar {
+    gap: 8px;
+  }
+
+  .app .brand {
+    font-size: 1.1rem;
+  }
+
+  .app .nav-tag {
+    padding: 5px 10px;
+    font-size: 0.6875rem;
+  }
+
+  .app .pill {
+    letter-spacing: 0.05em;
+  }
+
+  .app .interview-option {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .app .start-button {
+    font-size: 1rem;
+    padding: 0 18px;
+  }
+}
+
+/* Short desktop and laptop viewports: keep everything above the fold */
+@media (min-width: 769px) and (max-height: 760px) {
+  .app .hero {
+    padding-top: 16px;
+    padding-bottom: 28px;
+  }
+
+  .app .pill {
+    margin-bottom: 16px;
+  }
+
+  .app .description {
+    margin-top: 14px;
+  }
+
+  .app .interview-option {
+    margin-top: 24px;
+  }
+
+  .app .start-button {
+    margin-top: 18px;
+  }
+}
+
+
+/* ==========================================================================
+   11. Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .app .brand,
+  .app .interview-option,
+  .app .start-button,
+  .app .start-button span {
+    transition: none;
+  }
+
+  .app .start-button:hover,
+  .app .start-button:active {
+    transform: none;
+  }
+
+  .app .start-button:hover span {
+    transform: none;
+  }
+} 
